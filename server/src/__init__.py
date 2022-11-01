@@ -4,6 +4,7 @@ import os
 import datetime
 from src.config.db import mongo
 from src.blueprints.auth import auth
+from src.blueprints.file import file
 
 
 def create_app(test_config=None):
@@ -21,5 +22,6 @@ def create_app(test_config=None):
 
     JWTManager(app)
     app.register_blueprint(auth)
+    app.register_blueprint(file)
 
     return app

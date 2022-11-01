@@ -18,3 +18,19 @@ def register_user(user):
     except Exception as e:
         print("Register Error: "+str(e))
         raise Exception("Failed to Register User")
+
+
+def login_user(user):
+    try:
+        user['password'] = hashlib.sha256(
+            user['password'].encode('utf-8')).hexdigest()
+        check = mongo.db.users.find_one({'email': user['email']})
+        if not check:
+            return False
+
+        if check["password"] != user["password"]:
+            return False
+        return True
+    except Exception as e:
+        print("Register Error: "+str(e))
+        raise Exception("Failed to Register User")
