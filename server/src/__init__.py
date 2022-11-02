@@ -15,7 +15,8 @@ def create_app(test_config=None):
         app.config.from_mapping(
             SECRET_KEY=os.environ.get("SECRET_KEY"),
             JWT_SECRET_KEY=os.environ.get("JWT_SECRET_KEY"),
-            JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1)
+            JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1),
+            UPLOAD_FOLDER=os.environ.get("UPLOAD_FOLDER")
         )
     else:
         app.config.from_mapping(test_config)
