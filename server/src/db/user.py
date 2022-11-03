@@ -30,7 +30,7 @@ def login_user(user):
 
         if check["password"] != user["password"]:
             return False
-        return True
+        return {"name": check['name'], "email": check["email"]}
     except Exception as e:
         print("Register Error: "+str(e))
         raise Exception("Failed to Register User")

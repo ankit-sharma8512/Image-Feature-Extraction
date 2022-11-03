@@ -7,21 +7,21 @@ import Auth from "../../services/auth";
 import routes from "../../routes"
 import useAuth from "../../hooks/useAuth";
 
-function Login() {
+function Register() {
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const { auth, setAuth } = useAuth()
   const [password, setPassword] = useState("")
+  const { auth, setAuth } = useAuth()
   const toast = useToast()
   const navigate = useNavigate()
 
-  const login = async () => {
+  const register = async () => {
     try {
-      const res = await Auth.loginUser(email, password)
+      const res = await Auth.registerUser(name, email, password)
       setAuth({ user: res.email, name: res.name })
       navigate(routes.DASHBOARD)
     } catch (error) {
-      console.log(error)
-      toast({ title: typeof error == "string" ? error : "Some Error Occured", status: "error", position: "top-right" })
+      toast({ title: error, status: "error", position: "top-right" })
     }
   }
 
@@ -34,14 +34,15 @@ function Login() {
   return (
     <VStack bg="#F4F6F6" h="100vh" justifyContent="center">
       <VStack w="22%" spacing={8}>
-        <Heading fontSize="5xl">Sign In</Heading>
+        <Heading fontSize="5xl">Register</Heading>
+        <TextField label="Name" setField={setName} />
         <TextField label="Email Address" setField={setEmail} />
         <PasswordField label="Password" setField={setPassword} />
-        <Button w="100%" colorScheme="blue" onClick={login}>Submit</Button>
-        <Text>Not Registered?<Link color="blue.500" pl="3" onClick={() => navigate(routes.REGISTER)}>Register</Link></Text>
+        <Button w="100%" colorScheme="blue" onClick={register}>Register</Button>
+        <Text>Already Registered?<Link color="blue.500" pl="3" onClick={() => navigate(routes.LOGIN)}>Sign In</Link></Text>
       </VStack>
     </VStack>
   );
 }
 
-export default Login;
+export default Register;

@@ -37,7 +37,8 @@ def loginUser():
             return error_message("Invalid Username or Password"), 402
 
         access = create_access_token(identity=user['email'])
-        logged_user = {"email": user["email"], "access-token": access}
+        logged_user = {
+            "name": is_valid["name"], "email": user["email"], "access-token": access}
         return jsonify(logged_user), 200
     except Exception as e:
         print(str(e))

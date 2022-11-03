@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { Heading, Button, VStack } from "@chakra-ui/react";
+import routes from "../../routes";
 
 function Home() {
   const navigate = useNavigate();
+
   const navigateToLogin = () => {
-    navigate("/login");
+    navigate(routes.REGISTER);
   };
 
   return (

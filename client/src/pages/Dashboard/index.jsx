@@ -1,16 +1,16 @@
 import React from "react";
 import Topbar from "../../components/Topbar";
-import Content from "../../components/Content";
-import Sidebar from "../../components/Sidebar/index";
-import { HStack, Box } from "@chakra-ui/react";
+import { Outlet } from "react-router-dom";
+import SidebarLayout from "../../components/SidebarLayout";
+
 function Dashboard() {
+
   return (
     <>
       <Topbar />
-      <HStack>
-        <Sidebar />
-        <Content />
-      </HStack>
+      <SidebarLayout>
+        <Outlet />
+      </SidebarLayout>
     </>
   );
 }

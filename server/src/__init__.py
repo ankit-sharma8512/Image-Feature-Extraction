@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 import os
 import datetime
 from src.config.db import mongo
@@ -9,6 +10,7 @@ from src.blueprints.file import file
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
     #app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
     mongo.init_app(app, uri=os.environ.get("MONGO_URI"))
     if test_config is None:
